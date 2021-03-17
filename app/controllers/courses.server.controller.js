@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Course = mongoose.model('Course');
 const Student = require('mongoose').model('Student');
 
-//This function throws errors
+//This function throws errors....
 function getErrorMessage(err) {
     if (err.errors) {
         for (let errName in err.errors) {
