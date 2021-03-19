@@ -8,8 +8,15 @@ import { withRouter } from 'react-router-dom';
 
 function CreateStudent(props) {
     const [student, setStudent] = useState({
-        _id: '', studentNumber: '', password: '', firstName: '', lastName: '',
-        address: '', city: '', phone: '', email: '', program: ''
+        _id: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        phone: '',
+        email: '',
+        program: ''
     });
     const [showLoading, setShowLoading] = useState(false);
     const apiUrl = "http://localhost:3000/";
@@ -18,9 +25,14 @@ function CreateStudent(props) {
         setShowLoading(true);
         e.preventDefault();
         const data = {
-            studentNumber: student.studentNumber, password: student.password, firstName: student.firstName,
-            lastName: student.lastName, address: student.address, city: student.city, phone: student.phone,
-            email: student.email, program: student.program
+            password: student.password,
+            firstName: student.firstName,
+            lastName: student.lastName,
+            address: student.address,
+            city: student.city,
+            phone: student.phone,
+            email: student.email,
+            program: student.program
         };
         axios.post(apiUrl, data)
             .then((result) => {
@@ -44,14 +56,6 @@ function CreateStudent(props) {
             <Jumbotron>
                 <Form onSubmit={saveStudent}>
                     <Form.Group>
-                        <Form.Label> Student Number</Form.Label>
-                        <Form.Control type="text" name="studentNumber" id="studentNumber" placeholder="Enter student number" value={student.studentNumber} onChange={onChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label> Password</Form.Label>
-                        <Form.Control type="password" name="password" id="password" placeholder="Enter password" value={student.password} onChange={onChange} />
-                    </Form.Group>
-                    <Form.Group>
                         <Form.Label> First Name</Form.Label>
                         <Form.Control type="text" name="firstName" id="firstName" placeholder="Enter first name" value={student.firstName} onChange={onChange} />
                     </Form.Group>
@@ -74,6 +78,10 @@ function CreateStudent(props) {
                     <Form.Group>
                         <Form.Label> Email</Form.Label>
                         <Form.Control type="text" name="email" id="email" rows="3" placeholder="Enter email" value={student.email} onChange={onChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label> Password</Form.Label>
+                        <Form.Control type="password" name="password" id="password" placeholder="Enter password" value={student.password} onChange={onChange} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Program</Form.Label>

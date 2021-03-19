@@ -24,7 +24,7 @@ exports.create = function (req, res) {
     console.log(req.body)
     //
     //
-    Student.findOne({ studentNumber: req.body.studentNumber }, (err, student) => {
+    Student.findOne({ email: req.body.email }, (err, student) => {
 
         if (err) { return getErrorMessage(err); }
         //

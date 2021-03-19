@@ -8,8 +8,15 @@ import { withRouter } from 'react-router-dom';
 
 function EditStudent(props) {
     const [student, setStudent] = useState({
-        _id: '', studentNumber: '', password: '', firstName: '', lastName: '',
-        address: '', city: '', phone: '', email: '', program: ''
+        _id: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        phone: '',
+        email: '',
+        program: ''
     });
     const [showLoading, setShowLoading] = useState(true);
     const apiUrl = "http://localhost:3000/students/" + props.match.params.id;
@@ -31,9 +38,14 @@ function EditStudent(props) {
         setShowLoading(true);
         e.preventDefault();
         const data = {
-            firstName: student.firstName, lastName: student.lastName, address: student.address,
-            city: student.city, phone: student.phone,
-            email: student.email, program: student.program
+            firstName: student.firstName,
+            lastName: student.lastName,
+            address: student.address,
+            city: student.city,
+            phone: student.phone,
+            email: student.email,
+            password: student.password,
+            program: student.program
         };
         axios.put(apiUrl, data)
             .then((result) => {
@@ -79,6 +91,10 @@ function EditStudent(props) {
                     <Form.Group>
                         <Form.Label> Email</Form.Label>
                         <Form.Control type="text" name="email" id="email" rows="3" placeholder="Enter email" value={student.email} onChange={onChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label> Password</Form.Label>
+                        <Form.Control type="password" name="password" id="password" placeholder="Enter password" value={student.password} onChange={onChange} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Program</Form.Label>

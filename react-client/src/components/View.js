@@ -47,6 +47,7 @@ function View(props) {
 
   }
 
+
   return (
     <div className="App">
       {(course === 'x')
@@ -55,7 +56,8 @@ function View(props) {
           ? <ListCourses screen={screen} setScreen={setScreen} />
           :
           <div>
-            <p>You are logged in using student number <b>{screen}</b></p>
+            <p>Welcome <b>{screen}</b>! </p>
+            <p>You have logged in successfully. </p>
             <p>{data}</p>
             <button onClick={verifyCookie}>Verify Cookie</button>
             <button onClick={createCourse}>Create Course</button>

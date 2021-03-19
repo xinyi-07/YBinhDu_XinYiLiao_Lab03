@@ -36,9 +36,13 @@ const getErrorMessage = function (err) {
 };
 // Create a new Student
 exports.create = function (req, res, next) {
+    let data = {
+        ...req.body, studentNumber: 300000000 + Math.floor(Math.random() * 10000000),
+    };
+    console.log("In create: random assigned srudent number=" + data)
     // Create a new instance of the 'Student' Mongoose model
-    var student = new Student(req.body); //get data from React form
-    console.log("body: " + req.body.studentNumber);
+    var student = new Student(data); //get data from React form
+    console.log("body: " + data);
 
     // Use the 'Student' instance's 'save' method to save a new student document
     student.save(function (err) {
@@ -111,13 +115,14 @@ exports.delete = function (req, res, next) {
 // authenticates a student
 exports.authenticate = function (req, res, next) {
     // Get credentials from request
+    console.log("In anthenticate method")
     console.log(req.body)
-    const studentNumber = req.body.auth.studentNumber;
+    const email = req.body.auth.email;
     const password = req.body.auth.password;
     console.log(password)
-    console.log(studentNumber)
+    console.log(email)
     //find the student with given Student Number using static method findOne
-    Student.findOne({ studentNumber: studentNumber }, (err, student) => {
+    Student.findOne({ email: email }, (err, student) => {
         if (err) {
             return next(err);
         } else {
@@ -126,13 +131,13 @@ exports.authenticate = function (req, res, next) {
             if (bcrypt.compareSync(password, student.password)) {
                 // Create a new token with the student id in the payload
                 // and which expires 300 seconds after issue
-                const token = jwt.sign({ id: student._id, studentNumber: student.studentNumber }, jwtKey,
+                const token = jwt.sign({ id: student._id, email: student.email }, jwtKey,
                     { algorithm: 'HS256', expiresIn: jwtExpirySeconds });
                 console.log('token:', token)
                 // set the cookie as the token string, with a similar max age as the token
                 // here, the max age is in milliseconds
                 res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: true });
-                res.status(200).send({ screen: student.studentNumber });
+                res.status(200).send({ screen: student.email });
                 //
                 //res.json({status:"success", message: "student found!!!", data:{student:
                 //student, token:token}});
@@ -142,7 +147,7 @@ exports.authenticate = function (req, res, next) {
                 next()
             } else {
                 res.json({
-                    status: "error", message: "Invalid Student Number/password!!!",
+                    status: "error", message: "Invalid Email/password!!!",
                     data: null
                 });
             }
@@ -180,9 +185,9 @@ exports.welcome = (req, res) => {
     }
 
     // Finally, return the welcome message to the student, along with their
-    // studentNumber given in the token
+    // email given in the token
     // use back-quotes here
-    res.send(`${payload.studentNumber}`)
+    res.send(`${payload.email}`)
 };
 //
 //sign out function in controller
