@@ -45,7 +45,7 @@ function ListStudentsInCourse(props) {
                             /*showDetail(item._id)*/
                         }}
                     >
-                        {item.fullName}
+                        <b>Name: </b> {item.fullName}
                     </ListGroup.Item>
                 ))}
             </ListGroup>

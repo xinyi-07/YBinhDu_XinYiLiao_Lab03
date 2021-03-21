@@ -3,6 +3,7 @@ import ListCoursesByStudent from './ListCoursesByStudent'
 import React, { useState } from 'react';
 //
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 //
 function View(props) {
@@ -57,12 +58,11 @@ function View(props) {
       ) : (
         <div>
           <p>Welcome <b>{screen}</b>! </p>
-          <p>You have logged in successfully. </p>
+          <p>You have logged in successfully. Use this page to create and view your courses</p>
           <p>{data}</p>
-          <button onClick={verifyCookie}>Verify Cookie</button>
-          <button onClick={createCourse}>Create Course</button>
-          <button onClick={() => listCoursesByStudent(studentNumber)}>View my Courses</button>
-          <button onClick={deleteCookie}>Log out</button>
+          <Button onClick={verifyCookie}>Verify Cookie</Button>&nbsp;
+          <Button onClick={createCourse}>Create Course</Button>&nbsp;
+          <Button onClick={() => listCoursesByStudent(studentNumber)}>View my Courses</Button>
         </div>
       )
       }
