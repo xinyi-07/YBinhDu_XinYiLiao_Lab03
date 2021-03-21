@@ -21,13 +21,13 @@ function Show(props) {
   }, []);
 
   return (
-    <div>
+    <div class="App">
+      <h1>Profile information</h1>
       {showLoading && <Spinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
       </Spinner>}
       <Jumbotron>
-        <h1>Profile information</h1>
-        <br></br>
+
         <h3>Name: {data.firstName}, {data.lastName}</h3>
         <p><b>Email:</b> {data.email}</p>
         <p><b>Student Number:</b> {data.studentNumber}</p>

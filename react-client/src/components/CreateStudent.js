@@ -53,6 +53,7 @@ function CreateStudent(props) {
                     <span className="sr-only">Loading...</span>
                 </Spinner>
             }
+            <div class="App"><h2>Sign in to create an account</h2></div>
             <Jumbotron>
                 <Form onSubmit={saveStudent}>
                     <Form.Group>

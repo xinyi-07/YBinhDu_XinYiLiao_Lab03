@@ -44,10 +44,9 @@ function CreateCourse(props) {
                     <span className="sr-only">Loading...</span>
                 </Spinner>
             }
+            <div class="App"><h2> {email}, You can create a course here! </h2></div>
             <Jumbotron>
                 <Form onSubmit={saveCourse}>
-                    <h2> {email}, You can create a course here! </h2>
-                    <br></br>
                     <Form.Group>
                         <Form.Label> Course Code</Form.Label>
                         <Form.Control type="text" name="courseCode" id="courseCode" placeholder="Enter course code" value={course.courseCode} onChange={onChange} />

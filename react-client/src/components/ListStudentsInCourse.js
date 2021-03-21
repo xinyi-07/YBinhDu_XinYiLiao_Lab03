@@ -30,7 +30,7 @@ function ListStudentsInCourse(props) {
     }, []);
 
     return (
-        <div>
+        <div class="App">
 
             {showLoading && <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>

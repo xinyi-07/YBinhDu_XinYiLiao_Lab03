@@ -57,7 +57,7 @@ function View(props) {
         <CreateCourse studentNumber={studentNumber} screen={screen} setScreen={setScreen} />
       ) : (
         <div>
-          <p>Welcome <b>{screen}</b>! </p>
+          <h3>Welcome to the home page <u><b>{screen}</b></u>! </h3>
           <p>You have logged in successfully. Use this page to create and view your courses</p>
           <p>{data}</p>
           <Button onClick={verifyCookie}>Verify Cookie</Button>&nbsp;

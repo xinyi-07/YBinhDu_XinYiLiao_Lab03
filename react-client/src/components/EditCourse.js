@@ -44,8 +44,7 @@ function EditCourse(props) {
 
     return (
         <div>
-            <h1>Update Course</h1>
-            <h5>You can update the section </h5>
+            <div class="App"><h2> You can update your course here! </h2></div>
             {showLoading &&
                 <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>

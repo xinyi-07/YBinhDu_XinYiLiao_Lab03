@@ -69,6 +69,7 @@ function App(props) {
     <div>
       {screen === 'auth'
         ? <div>
+          <div class="App"><h2>Login to create/update/drop/view course</h2></div>
           <Jumbotron>
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -86,6 +87,5 @@ function App(props) {
     </div>
   );
 }
-
 export default App;
 

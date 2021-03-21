@@ -14,7 +14,6 @@ import './App.css';
 //
 import CreateStudent from './components/CreateStudent';
 
-import EditStudent from './components/EditStudent';
 import EditCourse from './components/EditCourse';
 
 import List from './components/List';
@@ -49,14 +48,14 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/home">About</Nav.Link>
             <Nav.Link href="/list">List of All Students</Nav.Link>
             <Nav.Link href="/listcourses">List of All Courses</Nav.Link>
             {!isLoginIn ? <>
               <Nav.Link href="/login">Login</Nav.Link>
               <Nav.Link href="/create">Sign Up</Nav.Link>
             </> : <>
-              <Nav.Link href="/login">Welcome</Nav.Link>
+              <Nav.Link href="/login">Home</Nav.Link>
               <Nav.Link href="#" onClick={() => clearLogin()}>Logout</Nav.Link></>}
 
           </Nav>
@@ -64,13 +63,11 @@ function App() {
       </Navbar>
 
       <div>
-
         <Route render={() => < Home />} path="/home" />
         <Route render={() => < Login setIsLogIn={setIsLogIn} />} path="/login" />
         <Route render={() => < List />} path="/list" />
         <Route render={() => < ListCourses />} path="/listcourses" />
         <Route render={() => < CreateStudent />} path="/create" />
-        <Route render={() => < EditStudent />} path="/edit/:id" />
         <Route render={() => < Show />} path="/show/:id" />
         <Route render={() => < ShowCourse />} path="/showcourse/:id" />
         <Route render={() => < EditCourse />} path="/editcourse/:id" />

@@ -38,7 +38,7 @@ function List(props) {
   }
 
   return (
-    <div>
+    <div class="App">
       { data.length !== 0
         ? <div>
           {showLoading && <Spinner animation="border" role="status">
