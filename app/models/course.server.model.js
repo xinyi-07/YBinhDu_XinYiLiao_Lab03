@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const CourseSchema = new Schema({ //not sure if i am right about the types.
+const CourseSchema = new Schema({
     courseCode: {
         type: String,
         default: '',
@@ -21,7 +21,7 @@ const CourseSchema = new Schema({ //not sure if i am right about the types.
         default: '',
     },
     creator: {
-        type: Schema.ObjectId,      //not sure about this...?
+        type: Schema.ObjectId,
         ref: 'Student'
     }
 });

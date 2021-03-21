@@ -136,8 +136,8 @@ exports.authenticate = function (req, res, next) {
                 console.log('token:', token)
                 // set the cookie as the token string, with a similar max age as the token
                 // here, the max age is in milliseconds
-                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: true });
-                res.status(200).send({ screen: student.email });
+                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: false });
+                res.status(200).send({ screen: student.email, studentNumber: student._id });
                 //
                 //res.json({status:"success", message: "student found!!!", data:{student:
                 //student, token:token}});
@@ -257,5 +257,20 @@ exports.requiresLogin = function (req, res, next) {
     }
     // student is authenticated
     //call next function in line
+    next();
+};
+//The hasAuthorization() middleware uses the req.course and req.student objects
+//to verify that the current student is the creator of the current course
+exports.hasAuthorization = function (req, res, next) {
+    //console.log('in hasAuthorization - creator: ', req.course.creator)
+    console.log('in hasAuthorization - current students id: ', req.id)
+    console.log('in hasAuthorization - student: ', req.student._id)
+
+
+    if (req.student._id !== req.id) {
+        return res.status(403).send({
+            message: 'Student is not authorized'
+        });
+    }
     next();
 };

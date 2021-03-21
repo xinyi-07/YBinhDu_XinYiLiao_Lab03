@@ -7,8 +7,9 @@ import axios from 'axios';
 //
 import View from './View'
 //
-function App() {
+function App(props) {
   //state variable for the screen, admin or student
+  const { setIsLogIn } = props
   const [screen, setScreen] = useState('auth');
   //store input field data, student Number and password
   const [email, setEmail] = useState();
@@ -28,8 +29,10 @@ function App() {
       console.log(res.data.screen)
       //process the response
       if (res.data.screen !== undefined) {
+        sessionStorage.setItem('email', res.data.screen);
+        sessionStorage.setItem('studentNumber', res.data.studentNumber);
         setScreen(res.data.screen);
-        console.log(res.data.screen);
+        setIsLogIn(true);
       }
     } catch (e) { //print the error
       console.log(e);
@@ -47,6 +50,7 @@ function App() {
       // 
       if (res.data.screen !== undefined) {
         setScreen(res.data.screen);
+
         console.log(res.data.screen)
       }
     } catch (e) {
@@ -58,21 +62,24 @@ function App() {
   //to check if student is signed in
   useEffect(() => {
     readCookie();
-  }, []); //only the first render
+    setScreen((document.cookie).includes("token") ? sessionStorage.getItem("email") : "auth");
+  }, [setScreen]); //only the first render
   //
   return (
-    <div className="App">
+    <div>
       {screen === 'auth'
         ? <div>
-          <label> Student Email: </label>
-          <br />
-          <input type="text" onChange={e => setEmail(e.target.value)} />
-          <br />
-          <label>Password: </label>
-          <br />
-          <input type="password" onChange={e => setPassword(e.target.value)} />
-          <br />
-          <button onClick={auth}>Login</button>
+          <Jumbotron>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <Form.Control type='email' name='email' id='email' onChange={(e) => setEmail(e.target.value)} ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control type='password' name='password' id='password' onChange={(e) => setPassword(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Button variant='primary' type='submit' onClick={auth}> Log In </Button>
+          </Jumbotron>
         </div>
         : <View screen={screen} setScreen={setScreen} />
       }

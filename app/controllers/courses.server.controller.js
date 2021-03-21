@@ -51,7 +51,7 @@ exports.create = function (req, res) {
 };
 //
 exports.list = function (req, res) {
-    Course.find().sort('-created').populate('creator', 'firstName lastName fullName').exec((err, courses) => {
+    Course.find().sort('-created').populate('creator', 'courseCode courseName section semester').exec((err, courses) => {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -63,7 +63,7 @@ exports.list = function (req, res) {
 };
 //
 exports.courseByID = function (req, res, next, id) {
-    Course.findById(id).populate('creator', 'firstName lastName fullName').exec((err, course) => {
+    Course.findById(id).populate('creator', 'courseCode courseName section semester').exec((err, course) => {
         if (err) return next(err);
         if (!course) return next(new Error('Failed to load course '
             + id));
@@ -121,4 +121,36 @@ exports.hasAuthorization = function (req, res, next) {
         });
     }
     next();
+};
+
+exports.listCoursesByStudent = function (req, res, next, studentNumber) {
+    var query = { creator: studentNumber };
+    Course.find(query)
+        .sort('-created')
+        .populate('creator', 'courseCode courseName section semester')
+        .exec((err, course) => {
+            if (err) {
+                return res.status(400).send({
+                    message: getErrorMessage(err),
+                });
+            } else {
+                res.status(200).json(course);
+            }
+        });
+};
+
+exports.listStudentsInCourse = function (req, res, next, courseCode) {
+    console.log(courseCode);
+    Course.find({ courseCode: courseCode }, (err, courses) => {
+        const studentIds = courses.map((course) => course.creator);
+        console.log(studentIds);
+        //res.status(200).json(studentIds);
+        Student.find({ _id: { $in: studentIds } }, (err, students) => {
+            if (err) {
+                res.status(500).json([]);
+            } else {
+                res.status(200).json(students);
+            }
+        })
+    })
 };

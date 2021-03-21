@@ -13,5 +13,13 @@ module.exports = function (app) {
         .delete(students.requiresLogin, courses.hasAuthorization, courses.
             delete);
     //
+    app.route('/api/listCoursesByStudent/:studentNumber')
+        .get(courses.listCoursesByStudent);
+
+    app.route('/api/listStudentsInCourse/:courseCode')
+        .get(courses.listStudentsInCourse);
+
     app.param('courseId', courses.courseByID);
+    app.param('studentNumber', courses.listCoursesByStudent);
+    app.param('courseCode', courses.listStudentsInCourse);
 };

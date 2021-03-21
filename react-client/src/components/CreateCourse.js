@@ -8,10 +8,10 @@ import React, { useState } from 'react';
 
 //
 function CreateCourse(props) {
-    //
+    const { studentNumber } = props;
     const email = props.screen;
     console.log('props.screen', props.screen)
-    const [course, setCourse] = useState({ _id: '', courseCode: '', courseName: '', section: '', semester: '', email: '' });
+    const [course, setCourse] = useState({ _id: '', courseCode: '', courseName: '', section: '', semester: '', email: '', creator: studentNumber });
     const [showLoading, setShowLoading] = useState(false);
     //
     const apiUrl = "http://localhost:3000/api/courses"
@@ -25,7 +25,8 @@ function CreateCourse(props) {
             .then((result) => {
                 setShowLoading(false);
                 console.log('results from save course:', result.data)
-                props.history.push('/showcourse/' + result.data._id)
+                //props.history.push('/showcourse/' + result.data._id)
+                props.history.push('/listCoursesByStudent/' + studentNumber)
 
             }).catch((error) => setShowLoading(false));
     };
@@ -46,6 +47,7 @@ function CreateCourse(props) {
             <Jumbotron>
                 <Form onSubmit={saveCourse}>
                     <h2> {email}, You can create a course here! </h2>
+                    <br></br>
                     <Form.Group>
                         <Form.Label> Course Code</Form.Label>
                         <Form.Control type="text" name="courseCode" id="courseCode" placeholder="Enter course code" value={course.courseCode} onChange={onChange} />
@@ -69,8 +71,11 @@ function CreateCourse(props) {
                         <Form.Label> Semester</Form.Label>
                         <Form.Control type="text" name="semester" id="semester" placeholder="Enter semester" value={course.semester} onChange={onChange} />
                     </Form.Group>
+                    <Form.Group>
+                        <Form.Control name='creator' id='creator' value={studentNumber} type='hidden' />
+                    </Form.Group>
 
-                    <Button variant="primary" type="submit">Save Course</Button>
+                    <Button variant="primary" type="submit">Create Course</Button>
                 </Form>
             </Jumbotron>
         </div>

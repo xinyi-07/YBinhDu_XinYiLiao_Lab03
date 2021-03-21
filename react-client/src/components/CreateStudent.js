@@ -19,7 +19,7 @@ function CreateStudent(props) {
         program: ''
     });
     const [showLoading, setShowLoading] = useState(false);
-    const apiUrl = "http://localhost:3000/";
+    const apiUrl = "http://localhost:3000/students";
 
     const saveStudent = (e) => {
         setShowLoading(true);

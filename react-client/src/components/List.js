@@ -45,6 +45,7 @@ function List(props) {
             <span className="sr-only">Loading...</span>
           </Spinner>}
           <h3>List of Students</h3>
+          <br></br>
           <ListGroup>
             {data.map((item, idx) => (
               <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}><b>Student Number:</b> {item.studentNumber}, <b>Name:</b> {item.firstName} {item.lastName}</ListGroup.Item>

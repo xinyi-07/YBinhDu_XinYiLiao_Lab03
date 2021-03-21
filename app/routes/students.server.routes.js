@@ -5,15 +5,16 @@ var students = require('../../app/controllers/students.server.controller');
 module.exports = function (app) {
     // handle a get request made to /students path
     // and list students when /students link is selected
-    app.get("/students", students.requiresLogin, students.list); //go to http://localhost:3000/students to see the list
-    //handle a post request made to root path
-    app.post('/', students.create);
-    //
+    app.route("/students")
+        .get(students.list)
+        .post(students.create);
+    //go to http://localhost:3000/students to see the list
+
     // Set up the 'students' parameterized routes 
     app.route('/students/:studentId')
         .get(students.read)
-        .put(students.update)
-        .delete(students.delete)
+    //.put(students.update)
+    //.delete(students.delete)
     // Set up the 'studentId' parameter middleware
     //All param callbacks will be called before any handler of 
     //any route in which the param occurs, and they will each 

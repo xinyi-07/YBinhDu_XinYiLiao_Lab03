@@ -2,14 +2,14 @@
 import { withRouter } from 'react-router-dom';
 
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 
 function Home(props) {
 
 
     return (
         <div>
-            <h2> Express - React with CRUD Operations</h2>
+            <h1>This is the Homepage!</h1>
+            <h3> Express - React with CRUD Operations</h3>
             <p>React front-end calls Express REST API to add,
             list, update, or delete a student</p>
         </div>

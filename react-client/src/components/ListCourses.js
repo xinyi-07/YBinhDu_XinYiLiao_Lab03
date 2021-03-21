@@ -30,9 +30,10 @@ function ListCourses(props) {
         fetchData();
     }, []);
 
-    const showDetail = (id) => {
+    const listStudents = (courseCode) => {
+        console.log("in list courses -> list students. Course code ")
         props.history.push({
-            pathname: '/showCourse/' + id
+            pathname: '/listStudentsInCourse/' + courseCode,
         });
     }
 
@@ -43,9 +44,11 @@ function ListCourses(props) {
                     {showLoading && <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
                     </Spinner>}
+                    <h2>This is the list of all the courses taken by different students!</h2>
+                    <br></br>
                     <ListGroup>
                         {data.map((item, idx) => (
-                            <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}><b>Course Code: </b>{item.courseCode}, <b>Course Name: </b>{item.courseName}</ListGroup.Item>
+                            <ListGroup.Item key={idx} action onClick={() => { listStudents(item.courseCode) }}><b>Course Code: </b>{item.courseCode}, <b>Course Name: </b>{item.courseName}</ListGroup.Item>
                         ))}
                     </ListGroup>
                 </div>
